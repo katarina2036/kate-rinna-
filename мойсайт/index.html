@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой авторский сайт — Фельцан Екатерина Анатольевна</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover { text-decoration: underline; }
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; }
+
+        /* ===== Галерея картинок ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: transform 0.2s;
+            margin: 0;
+        }
+        .gallery img:hover {
+            transform: scale(1.03);
+            border-color: #333;
+        }
+
+        /* ===== Стили для цитат ===== */
+        blockquote {
+            margin: 25px 0;
+            padding: 20px 25px;
+            background: #f9f9f9;
+            border-left: 5px solid #333;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #444;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+        blockquote p { margin: 0 0 10px 0; }
+        blockquote footer {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            font-style: normal;
+            background: none;
+            padding: 0;
+            margin: 0;
+        }
+        blockquote::before {
+            content: "“";
+            font-size: 60px;
+            color: #ccc;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        /* ===== Цитата-карточка с аватаром ===== */
+        .quote-card { display: flex; gap: 20px; align-items: flex-start; margin: 25px 0; }
+        .quote-avatar {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 3px solid #eee;
+            margin: 0;
+        }
+        .quote-content { flex: 1; }
+        .quote-card blockquote { margin: 0; }
+
+        footer.site-footer {
+            background: #333;
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Добро пожаловать на мой сайт</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Обо мне</h2>
+        <p>Просто сайт с осенней эстетикой и цитатами.</p>
+
+        <h2>Осенние картинки</h2>
+        <div class="gallery">
+            <img src="images/p1.jpg"  alt="Картинка 1">
+            <img src="images/p2.jpg"  alt="Картинка 2">
+            <img src="images/p3.jpg"  alt="Картинка 3">
+            <img src="images/p4.jpg"  alt="Картинка 4">
+            <img src="images/p5.jpg"  alt="Картинка 5">
+            <img src="images/p6.jpg"  alt="Картинка 6">
+            <img src="images/p7.jpg"  alt="Картинка 7">
+            <img src="images/p8.jpg"  alt="Картинка 8">
+            <img src="images/p9.jpg"  alt="Картинка 9">
+            <img src="images/p10.jpg" alt="Картинка 10">
+            <img src="images/p11.jpg" alt="Картинка 11">
+            <img src="images/p12.jpg" alt="Картинка 12">
+            <img src="images/p13.jpg" alt="Картинка 13">
+        </div>
+
+        <h2>Мои любимые цитаты</h2>
+
+        <!-- ЦИТАТА 1 -->
+        <blockquote>
+            <p>Мы то, что мы делаем постоянно. Совершенство — не действие, а привычка.</p>
+            <footer>— <cite>Аристотель</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 2 -->
+        <blockquote>
+            <p>Краткость — сестра таланта.</p>
+            <footer>— <cite>А. П. Чехов</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 3 -->
+        <blockquote>
+            <p>Всё гениальное просто, но не всё простое гениально.</p>
+            <footer>— <cite></cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 4 -->
+        <blockquote>
+            <p>Ученье — свет, а неученье — тьма.</p>
+            <footer>
+                Источник: <cite>«Русские пословицы и поговорки»</cite>,
+                сост. В. И. Даль, 1862 г.
+            </footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 5 -->
+        <blockquote>
+            <p>Жизнь — как вождение велосипеда. Чтобы сохранить равновесие, ты должен двигаться.</p>
+            <footer>— <cite>Альберт Эйнштейн</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 6 -->
+        <blockquote>
+            <p>В человеке всё должно быть прекрасно: и лицо, и одежда, и душа, и мысли.</p>
+            <footer>— <cite>А. П. Чехов</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 7 -->
+        <blockquote>
+            <p>Не бойся, что не знаешь — бойся, что не учишься.</p>
+            <footer>— <cite>Восточная мудрость</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 8 -->
+        <blockquote>
+            <p>Мы всё можем пережить, кроме смерти, и всё вынести, кроме власти.</p>
+            <footer>— <cite>Мишель Монтень</cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 9 -->
+        <blockquote>
+            <p>Свобода — это не то, что даётся, а то, что берётся.</p>
+            <footer>— <cite></cite></footer>
+        </blockquote>
+
+        <!-- ЦИТАТА 10: карточка с аватаром (p1.jpg) -->
+                    <p>Единственный способ сделать отличную работу — любить то, что делаешь.</p>
+                    <footer>— <cite>Стив Джобс</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Фельцан Екатерина Анатольевна. Все права защищены.</p>
+        <p style="font-size:12px;">Цитаты использованы в информационных целях с указанием авторов и источников.</p>
+    </footer>
+
+</body>
+</html>ем авторов и источников.</p>
+    </footer>
+
+</body>
+</html>
