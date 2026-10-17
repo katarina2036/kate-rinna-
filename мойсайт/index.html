@@ -3,224 +3,560 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой авторский сайт — Фельцан Екатерина Анатольевна</title>
+    <title>Мой авторский сайт — Фельцан Екатерина</title>
     <style>
+        /* ===== Базовые настройки ===== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(160deg, #fdf6ec 0%, #fce9d4 40%, #f7d9b8 100%);
+            color: #4a2e1b;
+            line-height: 1.7;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* ===== Осенний листопад (декоративный фон) ===== */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50px;
+            left: -50px;
+            right: -50px;
+            bottom: -50px;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(230, 126, 34, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 15%, rgba(192, 57, 43, 0.06) 0%, transparent 30%),
+                radial-gradient(circle at 70% 80%, rgba(243, 156, 18, 0.07) 0%, transparent 35%),
+                radial-gradient(circle at 25% 75%, rgba(211, 84, 0, 0.06) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== Шапка ===== */
         header {
-            background: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.92), rgba(192, 57, 43, 0.88));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 3px solid rgba(243, 156, 18, 0.5);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.25);
         }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fdf6ec;
+            letter-spacing: 1.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Декоративный кленовый лист в заголовке */
+        header h1::before {
+            content: "🍁 ";
+            font-size: 1.4rem;
+        }
+
         nav a {
-            color: #fff;
-            margin: 0 15px;
+            color: #fdf6ec;
             text-decoration: none;
-            font-weight: bold;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+            position: relative;
         }
-        nav a:hover { text-decoration: underline; }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: #f39c12;
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: #fdebd0;
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Основной контент ===== */
         main {
             flex: 1;
-            padding: 20px;
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: #fff;
+            padding: 2.5rem 1.5rem;
             width: 100%;
-            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
-        img { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; }
 
-        /* ===== Галерея картинок ===== */
+        h2 {
+            font-size: 1.9rem;
+            margin: 2.5rem 0 1.2rem;
+            color: #8b4513;
+            position: relative;
+            padding-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #d35400, #f39c12, #e74c3c);
+            border-radius: 3px;
+        }
+
+        h2::before {
+            content: "🍂 ";
+            font-size: 1.3rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: #5a3a24;
+        }
+
+        /* ===== Галерея ===== */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.4rem;
+            margin: 2rem 0;
         }
-        .gallery img {
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #fffaf3;
+            box-shadow: 0 8px 22px rgba(139, 69, 19, 0.15);
+            transition: transform 0.35s, box-shadow 0.35s;
+            cursor: pointer;
+            border: 2px solid rgba(243, 156, 18, 0.25);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: 0 18px 38px rgba(211, 84, 0, 0.3);
+            border-color: rgba(211, 84, 0, 0.5);
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #eee;
-            transition: transform 0.2s;
-            margin: 0;
-        }
-        .gallery img:hover {
-            transform: scale(1.03);
-            border-color: #333;
+            display: block;
+            transition: transform 0.5s;
         }
 
-        /* ===== Стили для цитат ===== */
-        blockquote {
-            margin: 25px 0;
-            padding: 20px 25px;
-            background: #f9f9f9;
-            border-left: 5px solid #333;
-            font-style: italic;
-            font-size: 1.1em;
-            color: #444;
-            border-radius: 0 8px 8px 0;
-            position: relative;
+        .gallery-item:hover img {
+            transform: scale(1.12);
         }
-        blockquote p { margin: 0 0 10px 0; }
-        blockquote footer {
-            text-align: right;
-            font-size: 0.9em;
-            color: #666;
-            font-style: normal;
-            background: none;
-            padding: 0;
-            margin: 0;
-        }
-        blockquote::before {
-            content: "“";
-            font-size: 60px;
-            color: #ccc;
+
+        .gallery-item .caption {
             position: absolute;
-            top: -10px;
-            left: 10px;
-            font-family: Georgia, serif;
-            line-height: 1;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(74, 46, 27, 0.9), rgba(74, 46, 27, 0.3) 70%, transparent);
+            color: #fdebd0;
+            padding: 1.8rem 0.9rem 0.9rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.35s;
+            font-style: italic;
         }
 
-        /* ===== Цитата-карточка с аватаром ===== */
-        .quote-card { display: flex; gap: 20px; align-items: flex-start; margin: 25px 0; }
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+
+        /* ===== Цитаты ===== */
+        .quotes-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quote-card {
+            display: flex;
+            gap: 1.6rem;
+            background: rgba(255, 250, 243, 0.92);
+            border-left: 6px solid #d35400;
+            border-radius: 16px;
+            padding: 1.9rem;
+            box-shadow: 0 10px 26px rgba(139, 69, 19, 0.12);
+            transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративный лист в углу карточки */
+        .quote-card::after {
+            content: "🍁";
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 1.4rem;
+            opacity: 0.25;
+            transition: opacity 0.35s, transform 0.35s;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 44px rgba(192, 57, 43, 0.18);
+            border-left-color: #e74c3c;
+        }
+
+        .quote-card:hover::after {
+            opacity: 0.6;
+            transform: rotate(15deg) scale(1.15);
+        }
+
         .quote-avatar {
-            width: 70px; height: 70px;
+            width: 92px;
+            height: 92px;
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
-            border: 3px solid #eee;
-            margin: 0;
+            border: 4px solid #f39c12;
+            box-shadow: 0 4px 14px rgba(211, 84, 0, 0.25);
+            transition: transform 0.35s, border-color 0.35s;
+            background: #fdf6ec;
         }
-        .quote-content { flex: 1; }
-        .quote-card blockquote { margin: 0; }
 
+        .quote-card:hover .quote-avatar {
+            transform: scale(1.08) rotate(-3deg);
+            border-color: #e74c3c;
+        }
+
+        .quote-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .quote-content p {
+            font-size: 1.12rem;
+            font-style: italic;
+            color: #4a2e1b;
+            margin-bottom: 0.9rem;
+            padding-left: 2.2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .quote-content p::before {
+            content: "“";
+            position: absolute;
+            left: 0;
+            top: -0.4rem;
+            font-size: 2.8rem;
+            color: #d35400;
+            font-family: Georgia, serif;
+            line-height: 1;
+            opacity: 0.75;
+        }
+
+        .quote-content footer {
+            text-align: right;
+            font-size: 0.95rem;
+            color: #c0392b;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .quote-content footer .source {
+            display: block;
+            font-weight: 400;
+            color: #8b6b4a;
+            font-size: 0.82rem;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        /* ===== Футер ===== */
         footer.site-footer {
-            background: #333;
-            color: #ccc;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.95), rgba(120, 50, 30, 0.95));
+            border-top: 3px solid rgba(243, 156, 18, 0.5);
+            color: #fdebd0;
             text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            margin-top: 20px;
+            padding: 1.8rem 1.5rem;
+            font-size: 0.92rem;
+            margin-top: 3.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer.site-footer p:first-child {
+            color: #f39c12;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        footer.site-footer p:last-child {
+            font-size: 0.78rem;
+            color: #d5b89a;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        /* ===== Адаптивность ===== */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            header h1 { font-size: 1.3rem; }
+            nav a { margin: 0 0.7rem; font-size: 0.95rem; }
+
+            .quote-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            .quote-avatar {
+                margin: 0 auto;
+                width: 80px;
+                height: 80px;
+            }
+            .quote-content p {
+                padding-left: 1.6rem;
+                text-align: left;
+                font-size: 1.05rem;
+            }
+            .quote-content footer {
+                text-align: center;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            .gallery-item img { height: 150px; }
+
+            h2 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Добро пожаловать на мой сайт</h1>
+        <h1>Мой авторский сайт</h1>
         <nav>
-            <a href="index.html">Главная</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#quotes">Цитаты</a>
         </nav>
     </header>
 
     <main>
         <h2>Обо мне</h2>
-        <p>Просто сайт с осенней эстетикой и цитатами.</p>
+        <p>Сайт для практики.Просто осень.Просто цитаты.</p>
 
-        <h2>Осенние картинки</h2>
+        <!-- ===== ГАЛЕРЕЯ ===== -->
+        <h2 id="gallery"></h2>
         <div class="gallery">
-            <img src="images/p1.jpg"  alt="Картинка 1">
-            <img src="images/p2.jpg"  alt="Картинка 2">
-            <img src="images/p3.jpg"  alt="Картинка 3">
-            <img src="images/p4.jpg"  alt="Картинка 4">
-            <img src="images/p5.jpg"  alt="Картинка 5">
-            <img src="images/p6.jpg"  alt="Картинка 6">
-            <img src="images/p7.jpg"  alt="Картинка 7">
-            <img src="images/p8.jpg"  alt="Картинка 8">
-            <img src="images/p9.jpg"  alt="Картинка 9">
-            <img src="images/p10.jpg" alt="Картинка 10">
-            <img src="images/p11.jpg" alt="Картинка 11">
-            <img src="images/p12.jpg" alt="Картинка 12">
-            <img src="images/p13.jpg" alt="Картинка 13">
-        </div>
-
-        <h2>Мои любимые цитаты</h2>
-
-        <!-- ЦИТАТА 1 -->
-        <blockquote>
-            <p>Мы то, что мы делаем постоянно. Совершенство — не действие, а привычка.</p>
-            <footer>— <cite>Аристотель</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 2 -->
-        <blockquote>
-            <p>Краткость — сестра таланта.</p>
-            <footer>— <cite>А. П. Чехов</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 3 -->
-        <blockquote>
-            <p>Всё гениальное просто, но не всё простое гениально.</p>
-            <footer>— <cite></cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 4 -->
-        <blockquote>
-            <p>Ученье — свет, а неученье — тьма.</p>
-            <footer>
-                Источник: <cite>«Русские пословицы и поговорки»</cite>,
-                сост. В. И. Даль, 1862 г.
-            </footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 5 -->
-        <blockquote>
-            <p>Жизнь — как вождение велосипеда. Чтобы сохранить равновесие, ты должен двигаться.</p>
-            <footer>— <cite>Альберт Эйнштейн</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 6 -->
-        <blockquote>
-            <p>В человеке всё должно быть прекрасно: и лицо, и одежда, и душа, и мысли.</p>
-            <footer>— <cite>А. П. Чехов</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 7 -->
-        <blockquote>
-            <p>Не бойся, что не знаешь — бойся, что не учишься.</p>
-            <footer>— <cite>Восточная мудрость</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 8 -->
-        <blockquote>
-            <p>Мы всё можем пережить, кроме смерти, и всё вынести, кроме власти.</p>
-            <footer>— <cite>Мишель Монтень</cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 9 -->
-        <blockquote>
-            <p>Свобода — это не то, что даётся, а то, что берётся.</p>
-            <footer>— <cite></cite></footer>
-        </blockquote>
-
-        <!-- ЦИТАТА 10: карточка с аватаром (p1.jpg) -->
-                    <p>Единственный способ сделать отличную работу — любить то, что делаешь.</p>
-                    <footer>— <cite>Стив Джобс</cite></footer>
-                </blockquote>
+            <div class="gallery-item">
+                <img src="images/p1.jpg" alt="Картинка 1">
+                <div class="caption">Подпись к фото 1</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p2.jpg" alt="Картинка 2">
+                <div class="caption">Подпись к фото 2</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p3.jpg" alt="Картинка 3">
+                <div class="caption">Подпись к фото 3</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p4.jpg" alt="Картинка 4">
+                <div class="caption">Подпись к фото 4</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p5.jpg" alt="Картинка 5">
+                <div class="caption">Подпись к фото 5</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p6.jpg" alt="Картинка 6">
+                <div class="caption">Подпись к фото 6</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p7.jpg" alt="Картинка 7">
+                <div class="caption">Подпись к фото 7</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p8.jpg" alt="Картинка 8">
+                <div class="caption">Подпись к фото 8</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p9.jpg" alt="Картинка 9">
+                <div class="caption">Подпись к фото 9</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p10.jpg" alt="Картинка 10">
+                <div class="caption">Подпись к фото 10</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p11.jpg" alt="Картинка 11">
+                <div class="caption">Подпись к фото 11</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p12.jpg" alt="Картинка 12">
+                <div class="caption">Подпись к фото 12</div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/p13.jpg" alt="Картинка 13">
+                <div class="caption">Подпись к фото 13</div>
             </div>
         </div>
 
+        <!-- ===== ЦИТАТЫ ===== -->
+        <h2 id="quotes">Мои любимые цитаты</h2>
+        <div class="quotes-section">
+
+            <!-- ЦИТАТА 1 -->
+            <div class="quote-card">
+                <img src="images/p1.jpg" alt="Аристотель" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Мы то, что мы делаем постоянно. Совершенство — не действие, а привычка.</p>
+                    <footer>— Аристотель
+                        <span class="source">Древнегреческий философ</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 2 -->
+            <div class="quote-card">
+                <img src="images/p2.jpg" alt="А. П. Чехов" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Краткость — сестра таланта.</p>
+                    <footer>— А. П. Чехов
+                        <span class="source">Письмо к брату, 1889 г.</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 3 -->
+            <div class="quote-card">
+                <img src="images/p3.jpg" alt="Иванов Иван Иванович" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Всё гениальное просто, но не всё простое гениально.</p>
+                    <footer>— Фельцан Екатерина
+                        <span class="source">Автор сайта</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 4 -->
+            <div class="quote-card">
+                <img src="images/p4.jpg" alt="В. И. Даль" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Ученье — свет, а неученье — тьма.</p>
+                    <footer>— Народная мудрость
+                        <span class="source">Сб. «Русские пословицы и поговорки», сост. В. И. Даль, 1862 г.</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 5 -->
+            <div class="quote-card">
+                <img src="images/p5.jpg" alt="Альберт Эйнштейн" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Жизнь — как вождение велосипеда. Чтобы сохранить равновесие, ты должен двигаться.</p>
+                    <footer>— Альберт Эйнштейн
+                        <span class="source">Физик-теоретик</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 6 -->
+            <div class="quote-card">
+                <img src="images/p6.jpg" alt="А. П. Чехов" class="quote-avatar">
+                <div class="quote-content">
+                    <p>В человеке всё должно быть прекрасно: и лицо, и одежда, и душа, и мысли.</p>
+                    <footer>— А. П. Чехов
+                        <span class="source">Пьеса «Дядя Ваня», 1897 г.</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 7 -->
+            <div class="quote-card">
+                <img src="images/p7.jpg" alt="Восточная мудрость" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Не бойся, что не знаешь — бойся, что не учишься.</p>
+                    <footer>— Восточная мудрость
+                        <span class="source">Китайская пословица</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 8 -->
+            <div class="quote-card">
+                <img src="images/p8.jpg" alt="Мишель Монтень" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Мы всё можем пережить, кроме смерти, и всё вынести, кроме власти.</p>
+                    <footer>— Мишель Монтень
+                        <span class="source">Французский философ</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 9 -->
+            <div class="quote-card">
+                <img src="images/p9.jpg" alt="Иванов Иван Иванович" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Свобода — это не то, что даётся, а то, что берётся.</p>
+                    <footer>— Фельцан Екатерина
+                        <span class="source">Автор сайта</span>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ЦИТАТА 10 -->
+            <div class="quote-card">
+                <img src="images/p10.jpg" alt="Стив Джобс" class="quote-avatar">
+                <div class="quote-content">
+                    <p>Единственный способ сделать отличную работу — любить то, что делаешь.</p>
+                    <footer>— Стив Джобс
+                        <span class="source">Соучредитель Apple</span>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2026 Фельцан Екатерина Анатольевна. Все права защищены.</p>
-        <p style="font-size:12px;">Цитаты использованы в информационных целях с указанием авторов и источников.</p>
-    </footer>
-
-</body>
-</html>ем авторов и источников.</p>
+        <p>&copy; 2026 Фельцан Екатерина. Все права защищены.</p>
+        <p>Цитаты использованы в информационных целях с указанием авторов и источников.</p>
     </footer>
 
 </body>
